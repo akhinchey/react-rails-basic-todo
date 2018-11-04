@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :lists do
   end
 
-  root 'lists#index'
+  root 'home#index'
 end

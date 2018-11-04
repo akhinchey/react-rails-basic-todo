@@ -1,25 +1,34 @@
 class ListsController < ApplicationController
+
     def index
         @lists = List.all
+        respond_to do |format|
+            format.html
+            format.json { render json: {lists: @lists} }
+            # format.json { render json: @lists }
+        end
     end
 
     def show
         @list = List.find(params[:id])
     end
 
-    def new
+    def create
         @list = List.new(list_params)
         if @list.save
+            render json: @list
         else
+            redirect_to 'new'
         end
     end
 
-    def create
+    def destroy
+        List.destroy(params[:id])
     end
 
     private
     def list_params
-        params.require(:list).permit(:title)
+        params.require(:list).permit(:id, :title)
     end
 
 end
