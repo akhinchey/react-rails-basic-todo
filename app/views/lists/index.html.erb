@@ -1,1 +1,7 @@
 <h1>Current Lists</h1>
+
+<ul>
+    <% @lists.each do |list| %>
+        <li><%= link_to list.title, list_path(list) %></li>
+    <% end %>
+</ul>

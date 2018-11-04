@@ -1,8 +1,10 @@
 class ListsController < ApplicationController
     def index
+        @lists = List.all
     end
 
     def show
+        @list = List.find(params[:id])
     end
 
     def new
@@ -10,5 +12,5 @@ class ListsController < ApplicationController
 
     def create
     end
-    
+
 end

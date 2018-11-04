@@ -1,0 +1,7 @@
+<h1><%= @list.title %></h1>
+
+<ul>
+    <% @list.tasks.each do |task| %>
+        <li><%= task.desc %></li>
+    <% end %>
+</ul>
