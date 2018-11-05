@@ -1,9 +1,13 @@
-class AllLists extends React.Component {
-    render () {
+const AllLists = (props) => {
+    const lists = props.lists.map((list) => {
         return (
-            <div>
-                This is where the lists will be
-            </div>
+            <li>{list.title}</li>
         )
-    }
+    })
+    
+    return (
+        <ul>
+            {lists}
+        </ul>
+    );
 }

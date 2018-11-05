@@ -4,7 +4,7 @@ class ListsController < ApplicationController
         @lists = List.all
         respond_to do |format|
             format.html
-            format.json { render json: {lists: @lists} }
+            format.json { render json: @lists }
             # format.json { render json: @lists }
         end
     end
