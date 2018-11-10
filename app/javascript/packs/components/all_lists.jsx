@@ -1,7 +1,9 @@
+import React from 'react';
+
 const AllLists = (props) => {
-    const lists = props.lists.map((list) => {
+    const lists = props.lists.map((list, i) => {
         return (
-            <li>{list.title}</li>
+            <li key={i}>{list.title}</li>
         )
     })
     
