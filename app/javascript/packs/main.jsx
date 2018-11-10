@@ -1,4 +1,7 @@
-class Main extends React.Component {
+import React from 'react';
+import AllLists from './components/all_lists';
+
+export default class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {lists: null}

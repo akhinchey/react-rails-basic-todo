@@ -11,3 +11,5 @@ const AllLists = (props) => {
         </ul>
     );
 }
+
+export default AllLists;
