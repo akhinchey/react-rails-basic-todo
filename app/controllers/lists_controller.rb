@@ -14,10 +14,12 @@ class ListsController < ApplicationController
     end
 
     def create
+        puts "hello"
         @list = List.new(list_params)
         if @list.save
             render json: @list
         else
+            puts @list.errors.full_messages
             redirect_to 'new'
         end
     end
