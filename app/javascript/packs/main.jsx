@@ -1,5 +1,7 @@
 import React from 'react';
 import AllLists from './components/all_lists';
+import ListErrors from './components/list_errors';
+
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -51,6 +53,7 @@ export default class Main extends React.Component {
         return (
             <div>
                 <h1>Current Lists</h1>
+                <ListErrors errors={this.state.errors} />
                 <AllLists lists={this.state.lists} />
 
                 <form onSubmit={this.handleListSubmit}>
