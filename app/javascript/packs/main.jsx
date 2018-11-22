@@ -46,16 +46,35 @@ export default class Main extends React.Component {
         e.target.reset();
     }
 
+    handleListDelete = (id) => {
+        fetch(`/lists/${id}`, {
+            method: 'DELETE',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            }
+        })
+        .then(() => { this.deleteList(id)})
+    }
+
+    deleteList (id) {
+        const newLists = this.state.lists.filter(list => list.id !== id)
+        this.setState({
+            lists: newLists,
+        })
+    }
+
 
     render () {
-        if (!this.state.lists) {
-            return null;
-        }
+        if (!this.state.lists) return null;
+
         return (
             <div>
                 <h1>Current Lists</h1>
                 <ListErrors errors={this.state.errors} />
-                <AllLists lists={this.state.lists} />
+                <AllLists lists={this.state.lists}
+                          handleDelete={this.handleListDelete} />
 
                 <form onSubmit={this.handleListSubmit}>
                     <input type="text" ref={ (input) => {this.listTitle = input} } />
