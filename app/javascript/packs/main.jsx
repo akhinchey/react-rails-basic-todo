@@ -4,7 +4,10 @@ import AllLists from './components/all_lists';
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {lists: null}
+        this.state = {
+            lists: null,
+            errors: null,
+        }
     }
 
     componentDidMount = () => {
@@ -25,9 +28,21 @@ export default class Main extends React.Component {
                 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
             },
         })
-        .then((response) => { return response.json() })
-        .then((data) => {console.log(data) })
+        .then(response => response.json())
+        .then(data => {
+            if (data.errors) {
+                this.setState({errors: data.errors})
+            } else {
+                this.setState({
+                    lists: this.state.lists.concat(data)
+                })
+            }
+        })
+        .catch(error => console.log(error))
+
+        e.target.reset();
     }
+
 
     render () {
         if (!this.state.lists) {

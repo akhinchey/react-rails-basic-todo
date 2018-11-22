@@ -1,11 +1,10 @@
 class ListsController < ApplicationController
 
     def index
-        @lists = List.all
+        lists = List.all
         respond_to do |format|
             format.html
-            format.json { render json: @lists }
-            # format.json { render json: @lists }
+            format.json { render json: lists }
         end
     end
 
@@ -18,7 +17,7 @@ class ListsController < ApplicationController
         if list.save
             render json: list
         else
-            redirect_to 'new'
+            render json: { errors: list.errors.full_messages }
         end
     end
 
