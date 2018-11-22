@@ -18,13 +18,15 @@ export default class Main extends React.Component {
         const list = {title: this.listTitle.value}
         fetch('/lists', {
             method: 'POST',
+            credentials: 'same-origin',
             body: JSON.stringify({list: list}),
             headers: {
                 'Content-Type':'application/json',
                 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
             },
         })
-        .then((response) => { console.log(response) })
+        .then((response) => { return response.json() })
+        .then((data) => {console.log(data) })
     }
 
     render () {
