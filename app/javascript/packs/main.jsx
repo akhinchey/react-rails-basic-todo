@@ -36,7 +36,8 @@ export default class Main extends React.Component {
                 this.setState({errors: data.errors})
             } else {
                 this.setState({
-                    lists: this.state.lists.concat(data)
+                    lists: this.state.lists.concat(data),
+                    errors: null,
                 })
             }
         })
