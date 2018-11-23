@@ -5,13 +5,15 @@ export default class List extends React.Component {
         super(props);
         this.state = {
             list: null,
+            tasks: null,
         }
     }
 
     componentDidMount = () => {
-        const list = JSON.parse(this.props.appData);
+        const listData = JSON.parse(this.props.appData);
         this.setState({
-            list: list,
+            list: listData.list,
+            tasks: listData.tasks,
         })
     }
 

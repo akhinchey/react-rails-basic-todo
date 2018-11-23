@@ -14,8 +14,8 @@ export default class Main extends React.Component {
 
     componentDidMount = () => {
         fetch('/lists.json')
-        .then((response) => { return response.json() })
-        .then((data) => {this.setState({ lists: data }) })
+        .then(response => response.json())
+        .then(data => this.setState({ lists: data }))
     }
 
     handleListSubmit = (e) => {
