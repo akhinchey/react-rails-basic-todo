@@ -8,14 +8,19 @@ export default class List extends React.Component {
         }
     }
 
-    // componentDidMount = () => {
-    //     fetch(`/lists/${}`)
-    // }
+    componentDidMount = () => {
+        const list = JSON.parse(this.props.appData);
+        this.setState({
+            list: list,
+        })
+    }
 
     render () {
+        if (!this.state.list) return null;
+
         return (
             <div>
-                Hello World
+                <h1>{this.state.list.title}</h1>
             </div>
         )
     }
