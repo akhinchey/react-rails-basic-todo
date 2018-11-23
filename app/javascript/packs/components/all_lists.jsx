@@ -4,7 +4,7 @@ const AllLists = (props) => {
     const lists = props.lists.map((list, i) => {
         return (
             <li key={i}>
-                {list.title}
+                <a href={`/lists/${list.id}`}>{list.title}</a>
                 <button onClick={() => props.handleDelete(list.id)}>Delete</button>
             </li>
         )

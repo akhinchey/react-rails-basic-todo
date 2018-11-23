@@ -1,23 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import Main from './main'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Main from './main';
+import List from './components/list';
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
 
-Hello.defaultProps = {
-  name: 'David'
+const apps = { Main, List };
+const appEL = document.getElementById('app');
+const appData = !!appEL && appEL.getAttribute('data-props');
+const App = !!appEL && apps[appEL.className];
+
+if (App) {
+  ReactDOM.render(<App appData={appData} />, document.getElementById("app"));
 }
-
-Hello.propTypes = {
-  name: PropTypes.string
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Main />,
-    document.getElementById('root'),
-  )
-})

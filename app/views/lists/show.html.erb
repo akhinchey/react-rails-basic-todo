@@ -1,7 +1,1 @@
-<h1><%= @list.title %></h1>
-
-<ul>
-    <% @list.tasks.each do |task| %>
-        <li><%= task.desc %></li>
-    <% end %>
-</ul>
+<div id="app" class="List" data-props="<%= @list.id %>"></div>
