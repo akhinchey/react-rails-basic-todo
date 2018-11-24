@@ -9,6 +9,14 @@ class TasksController < ApplicationController
         end
     end
 
+    def update
+        task = Task.find(params[:id])
+        if !task.completed
+            task.completed = true
+            task.save
+        end
+    end
+
     private
     def task_params
         params.require(:task).permit(:desc)

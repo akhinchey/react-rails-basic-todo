@@ -1,21 +1,40 @@
 import React from 'react';
 
-const AllTasks = (props) => {
-    const tasks = props.tasks.map((task, i) => {
+export default class AllTasks extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    buildCompleted(task) {
+        if (task.completed) return (<span>complete</span>)
+
         return (
-            <li key={i}>
-                {task.desc}
-            </li>
+            <input type="checkbox"
+                   onChange={() => {this.props.markComplete(task.id)}}
+                   checked={task.completed} />
         )
-    })
+    }
 
-    return (
-        <div>
-            <ul>
-                {tasks}
-            </ul>
-        </div>
-    )
+    buildTasks() {
+        return this.props.tasks.map((task, i) => {
+            return (
+                <li key={i}>
+                    {task.desc}
+                    {this.buildCompleted(task)}
+                </li>
+            )
+        })
+    }
+
+    render () {
+        if (!this.props.tasks) return null;
+
+        return (
+            <div>
+                <ul>
+                    {this.buildTasks()}
+                </ul>
+            </div>
+        )
+    }
 }
-
-export default AllTasks;

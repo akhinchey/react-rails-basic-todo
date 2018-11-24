@@ -18,13 +18,37 @@ export default class List extends React.Component {
         })
     }
 
+    checkTask(id) {
+        const newTasks = this.state.tasks.map((task) => {
+            if (task.id === id) task.completed = true;
+            return task;
+        })
+        this.setState({tasks: newTasks,})
+    }
+
+    markTaskComplete = (id) => {
+        const listID = this.state.list.id;
+        fetch (`/lists/${listID}/tasks/${id}`, {
+            method: 'PATCH',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            }
+        })
+        .then((response) => {
+            if (response.ok) this.checkTask(id);
+        })
+    }
+
     render () {
         if (!this.state.list) return null;
 
         return (
             <div>
                 <h1>{this.state.list.title}</h1>
-                <AllTasks tasks={this.state.tasks} />
+                <AllTasks tasks={this.state.tasks}
+                          markComplete={this.markTaskComplete} />
                 <a href="/">back</a>
             </div>
         )
