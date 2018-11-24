@@ -12,7 +12,6 @@ class ListsController < ApplicationController
 
     def show
         @list = List.find(params[:id])
-        # respond_to :html, :json
     end
 
     def create

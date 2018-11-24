@@ -12,7 +12,7 @@ export default class Main extends React.Component {
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         fetch('/lists.json')
         .then(response => response.json())
         .then(data => this.setState({ lists: data }))
@@ -58,7 +58,7 @@ export default class Main extends React.Component {
         .then(() => { this.deleteList(id)})
     }
 
-    deleteList (id) {
+    deleteList(id) {
         const newLists = this.state.lists.filter(list => list.id !== id)
         this.setState({
             lists: newLists,
