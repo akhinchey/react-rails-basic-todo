@@ -7,6 +7,7 @@ export default class List extends React.Component {
         this.state = {
             list: null,
             tasks: null,
+            errors: null,
         }
     }
 
@@ -24,6 +25,25 @@ export default class List extends React.Component {
             return task;
         })
         this.setState({tasks: newTasks,})
+    }
+
+    handleTaskSubmit = (e) => {
+        e.preventDefault();
+        const listID = this.state.list.id;
+        const task = {desc: this.taskDesc.value}
+        fetch(`/lists/${listID}/tasks`, {
+            method: 'POST',
+            body: JSON.stringify({task: task}),
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+            },
+        })
+        .then(response => response.json())
+        .then(data => this.setState({
+            tasks: this.state.tasks.concat(data)
+        }))
     }
 
     markTaskComplete = (id) => {
@@ -49,6 +69,11 @@ export default class List extends React.Component {
                 <h1>{this.state.list.title}</h1>
                 <AllTasks tasks={this.state.tasks}
                           markComplete={this.markTaskComplete} />
+                
+                <form onSubmit={this.handleTaskSubmit}>
+                    <input type="text" ref={ (input) => {this.taskDesc = input} } />
+                    <input type="submit" />
+                </form>
                 <a href="/">back</a>
             </div>
         )
