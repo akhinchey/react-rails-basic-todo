@@ -12,11 +12,13 @@ export default class Main extends React.Component {
         }
     }
 
+
     componentDidMount() {
         fetch('/lists.json')
         .then(response => response.json())
         .then(data => this.setState({ lists: data }))
     }
+
 
     handleListSubmit = (e) => {
         e.preventDefault();
@@ -46,6 +48,7 @@ export default class Main extends React.Component {
         e.target.reset();
     }
 
+
     handleListDelete = (id) => {
         fetch(`/lists/${id}`, {
             method: 'DELETE',
@@ -57,6 +60,7 @@ export default class Main extends React.Component {
         })
         .then(() => { this.deleteList(id)})
     }
+
 
     deleteList(id) {
         const newLists = this.state.lists.filter(list => list.id !== id)

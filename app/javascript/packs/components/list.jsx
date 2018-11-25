@@ -11,6 +11,7 @@ export default class List extends React.Component {
         }
     }
 
+
     componentDidMount() {
         const listData = JSON.parse(this.props.appData);
         this.setState({
@@ -19,6 +20,7 @@ export default class List extends React.Component {
         })
     }
 
+
     checkTask(id) {
         const newTasks = this.state.tasks.map((task) => {
             if (task.id === id) task.completed = true;
@@ -26,6 +28,7 @@ export default class List extends React.Component {
         })
         this.setState({tasks: newTasks,})
     }
+
 
     handleTaskSubmit = (e) => {
         e.preventDefault();
@@ -46,6 +49,7 @@ export default class List extends React.Component {
         }))
     }
 
+
     markTaskComplete = (id) => {
         const listID = this.state.list.id;
         fetch (`/lists/${listID}/tasks/${id}`, {
@@ -60,6 +64,7 @@ export default class List extends React.Component {
             if (response.ok) this.checkTask(id);
         })
     }
+
 
     render () {
         if (!this.state.list) return null;
